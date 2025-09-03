@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Birthday Aakanksha 🎂</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Pacifico&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: pink;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+      text-align: center;
+      flex-direction: column;
+      overflow: hidden;
+      padding-top: 50px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+      max-width: 500px;
+      position: relative;
+      margin-bottom: 20px;
+    }
+    img.main-pic {
+      width: 52.5%; /* pehle 35% tha, ab 50% zyada */
+      height: auto;
+      border-radius: 15px;
+      margin-bottom: 15px;
+    }
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    .buttons {
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 0 10px;
+      border: none;
+      border-radius: 25px;
+      background: #ff4da6;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #ff1a8c;
+    }
+    .corner-pic {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 90px; /* pehle 60px tha, ab 50% zyada */
+      opacity: 0.9;
+    }
+    #birthday-title {
+      font-family: 'Pacifico', cursive;
+      font-size: 38px;
+      color: #ff1a8c;
+      text-shadow: 2px 2px 6px #fff;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <audio autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- First Page: Birthday Wish -->
+  <div class="card" id="first-card">
+    <h1 id="birthday-title">Happy Birthday Aakanksha 🎉</h1>
+    <p>🎂 Aakanksha, tumhari zindagi hamesha khushiyon se bhari rahe 💕<br>
+    Tumhara har din amazing aur special ho ✨<br>
+    May tum hamesha smile karti raho aur har moment enjoy karo 🌸</p>
+    <div class="buttons">
+      <button onclick="nextPage()">Next ➡</button>
+    </div>
+  </div>
+
+  <!-- Main Pages -->
+  <div class="card" id="main-card" style="display:none;">
+    <img id="page-img" class="main-pic" src="" alt="page image">
+    <p id="message"></p>
+    <div class="buttons">
+      <button onclick="prevPage()">⬅ Back</button>
+      <button onclick="nextPage()">Next ➡</button>
+    </div>
+    <img src="unnamed.jpg" class="corner-pic" alt="cute corner">
+  </div>
+
+  <script>
+    const pages = [
+      {
+        img: "page2.jpg",
+        msg: "Welcome to your special surprise 💕<br>Tumhari smile meri duniya ko bright banati hai ✨<br>Har din tum aur bhi pyaari aur charming lagti ho 🤍<br>Har moment tumhare saath aur magical lagta hai 🌸"
+      },
+      {
+        img: "page3.jpg",
+        msg: "Tumhari aankhon mein ek alag hi magic hai 😉<br>Aankh band karke bhi tumhari muskaan yaad aa jaati hai 💫<br>Har baar tumhe dekh kar dil khush ho jaata hai 💖"
+      },
+      {
+        img: "page4.jpg",
+        msg: "Tum ekdum unique ho ✨<br>Tumhari simplicity aur sweetness dil ko bohot khush kar deti hai 💕<br>Har conversation tumhare saath bohot special lagti hai 🌷"
+      },
+      {
+        img: "page5.jpg",
+        msg: "Hamari dosti ek cute si kahani hai 🤝<br>Tum saath ho to har moment special lagta hai 🌸<br>Har pal tumhari yaadon se khushiyon se bhara lagta hai 💫"
+      },
+      {
+        img: "page6.jpg",
+        msg: "Secret Message 🌙<br>Tum meri zindagi ka ek bohot khaas hissa ho 💖<br>Tumse baat karna aur tumhare saath time bitana har din ko better bana deta hai ✨"
+      },
+      {
+        img: "page7.jpg",
+        msg: "Final Wish 🎂❤️<br>May your life hamesha happiness aur success se bhari rahe 💕<br>Har khwahish tumhari poori ho 🌟<br>Hamesha shine karti raho ✨ Happy Birthday once again 🥳"
+      }
+    ];
+
+    let current = 0;
+    const firstCard = document.getElementById("first-card");
+    const mainCard = document.getElementById("main-card");
+    const pageImg = document.getElementById("page-img");
+    const message = document.getElementById("message");
+
+    function showPage(index) {
+      mainCard.style.display = "block";
+      firstCard.style.display = "none";
+      pageImg.src = pages[index].img;
+      message.innerHTML = pages[index].msg;
+
+      confetti({
+        particleCount: 80,
+        spread: 60,
+        origin: { y: 0.6 }
+      });
+    }
+
+    function nextPage() {
+      if(firstCard.style.display !== "none") {
+        showPage(current);
+      } else if(current < pages.length -1){
+        current++;
+        showPage(current);
+      }
+    }
+
+    function prevPage() {
+      if(current > 0){
+        current--;
+        showPage(current);
+      } else {
+        mainCard.style.display = "none";
+        firstCard.style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>
+
